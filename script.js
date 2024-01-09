@@ -2,7 +2,7 @@
 // button reset ammount
 const resetBtn = document.getElementById('reset');
 
-function resetAmount() {
+function startSimu() {
   wallet.innerHTML = ("00.00");
   localStorage.setItem('wallet', wallet.innerHTML);
   stockPaper010.style.visibility = 'hidden';
@@ -11,6 +11,10 @@ function resetAmount() {
   localStorage.clear();
   let amountStockPapers = 0;
   showStockAmount.innerHTML = amountStockPapers;
+}
+
+function resetAmount() {
+  startSimu()
 }
 
 resetBtn.addEventListener('click', resetAmount);
@@ -158,3 +162,5 @@ setInterval(() => {
 //   // amount.innerHTML = newValue.toFixed(2);
 //   console.log(dividendsAmount);
 // }, 1000)
+
+startSimu();
