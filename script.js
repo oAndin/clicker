@@ -5,9 +5,10 @@ const resetBtn = document.getElementById('reset');
 function resetAmount() {
   wallet.innerHTML = ("00.00");
   localStorage.setItem('wallet', wallet.innerHTML);
-  stockPaper.style.visibility = 'hidden'
+  stockPaper010.style.visibility = 'hidden'
+  stockPaper100.style.visibility = 'hidden'
   stockAmount = 0;
-  localStorage.setItem('stockAmount', stockAmount)
+  localStorage.setItem('stockAmount', 0)
 }
 resetBtn.addEventListener('click', resetAmount);
 
@@ -17,7 +18,7 @@ let wallet = document.getElementById('wallet');
 wallet.innerHTML = (localStorage.getItem('wallet'));
 
 // variable stock paper
-const stockPaper = document.getElementById('stockPaper');
+const stockPaper010 = document.getElementById('stockPaper010');
 
 // variable stock amount
 
@@ -41,7 +42,10 @@ function clickAddMoney() {
   wallet.innerHTML = updatedWallet.toFixed(2);
   localStorage.setItem('wallet', wallet.innerHTML);
   if (wallet.innerHTML == .10) {
-    stockPaper.style.visibility = 'visible';
+    stockPaper010.style.visibility = 'visible';
+  }
+  if (wallet.innerHTML == 1.00) {
+    stockPaper100.style.visibility = 'visible';
   }
 }
 
@@ -49,11 +53,12 @@ clickArea.addEventListener('click', clickAddMoney);
 
 // get buy stock button
 
-const buyStockBtn = document.getElementById("stockPaper");
+const buyStockBtn010 = document.getElementById("stockPaper010");
+const buyStockBtn100 = document.getElementById("stockPaper100");
 
 // function buy papers 
 
-function buyAndHold() {
+function buyAndHold010() {
   if (wallet.innerHTML > .09) {
     wallet.innerHTML = (parseFloat(wallet.innerHTML) - 0.10).toFixed(2);
     stockAmount = stockAmount + 1;
@@ -65,18 +70,31 @@ function buyAndHold() {
   }
   console.log(stockAmount);
 }
+function buyAndHold100() {
+  if (wallet.innerHTML > 0.99) {
+    wallet.innerHTML = (parseFloat(wallet.innerHTML) - 1.00).toFixed(2);
+    stockAmount = stockAmount + 10;
+    showStockAmount.innerHTML = stockAmount;
+    localStorage.setItem('stockAmount', stockAmount)
+  }
+  else {
+    alert("You dont have enough money!")
+  }
+  console.log(stockAmount);
+}
 
-buyStockBtn.addEventListener('click', buyAndHold);
+buyStockBtn010.addEventListener('click', buyAndHold010);
+buyStockBtn100.addEventListener('click', buyAndHold100);
 
 // function dividend 
 
-if (stockAmount > 0) {
-  setInterval(() => {
+setInterval(() => {
+  if (stockAmount > 0) {
     let dividend = stockAmount * 0.01;
     wallet.innerHTML = (parseFloat(wallet.innerHTML) + parseFloat(dividend)).toFixed(2);
     console.log(dividend);
-  }, 10000);
-}
+  }
+}, 10000);
 
 // const screen = document.getElementById('screen');
 // let dividendsAmount;
