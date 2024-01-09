@@ -8,6 +8,7 @@ function resetAmount() {
   stockPaper010.style.visibility = 'hidden';
   stockPaper100.style.visibility = 'hidden';
   stockAmount = 0;
+  localStorage.clear();
   let amountStockPapers = 0;
   showStockAmount.innerHTML = amountStockPapers;
 }
@@ -105,7 +106,7 @@ setInterval(() => {
     localStorage.setItem('stockAmount', stockAmount)
     console.log(dividend);
   }
-}, 10000);  
+}, 10000);
 
 // const screen = document.getElementById('screen');
 // let dividendsAmount;
