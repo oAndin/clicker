@@ -5,11 +5,14 @@ const resetBtn = document.getElementById('reset');
 function resetAmount() {
   wallet.innerHTML = ("00.00");
   localStorage.setItem('wallet', wallet.innerHTML);
-  stockPaper010.style.visibility = 'hidden'
-  stockPaper100.style.visibility = 'hidden'
+  stockPaper010.style.visibility = 'hidden';
+  stockPaper100.style.visibility = 'hidden';
   stockAmount = 0;
-  localStorage.setItem('stockAmount', 0)
+  showStockAmount = 0;
+  localStorage.setItem('stockAmount', stockAmount)
+  localStorage.setItem('showStockAmount', showStockAmount)
 }
+
 resetBtn.addEventListener('click', resetAmount);
 
 // create the variable wallet
@@ -27,7 +30,17 @@ stockAmount = localStorage.getItem('stockAmount');
 
 // variable showing how much stocks you own
 
-let showStockAmount = document.getElementById('stockAmount');
+
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+// Não sei porra!
+// get html element
+let showStockAmount = document.getElementById('showStockAmount');
+// save amount that im supposed to show
+showStockAmount = localStorage.getItem('stockAmount');
+// ? 
+showStockAmount.innerHTML = showStockAmount;
+
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 // new variable to changes on the wallet 
 let updatedWallet;
@@ -41,7 +54,7 @@ function clickAddMoney() {
   updatedWallet = newValue;
   wallet.innerHTML = updatedWallet.toFixed(2);
   localStorage.setItem('wallet', wallet.innerHTML);
-  if (wallet.innerHTML == .10) {
+  if (wallet.innerHTML == 0.10) {
     stockPaper010.style.visibility = 'visible';
   }
   if (wallet.innerHTML == 1.00) {
@@ -63,7 +76,8 @@ function buyAndHold010() {
     wallet.innerHTML = (parseFloat(wallet.innerHTML) - 0.10).toFixed(2);
     stockAmount = stockAmount + 1;
     showStockAmount.innerHTML = stockAmount;
-    localStorage.setItem('stockAmount', stockAmount)
+    localStorage.setItem('stockAmount', stockAmount);
+    localStorage.setItem('showStockAmount', stockAmount);
   }
   else {
     alert("You dont have enough money!")
@@ -75,7 +89,8 @@ function buyAndHold100() {
     wallet.innerHTML = (parseFloat(wallet.innerHTML) - 1.00).toFixed(2);
     stockAmount = stockAmount + 10;
     showStockAmount.innerHTML = stockAmount;
-    localStorage.setItem('stockAmount', stockAmount)
+    localStorage.setItem('stockAmount', stockAmount);
+    localStorage.setItem('showStockAmount', stockAmount);
   }
   else {
     alert("You dont have enough money!")
@@ -92,9 +107,10 @@ setInterval(() => {
   if (stockAmount > 0) {
     let dividend = stockAmount * 0.01;
     wallet.innerHTML = (parseFloat(wallet.innerHTML) + parseFloat(dividend)).toFixed(2);
+    localStorage.setItem('stockAmount', stockAmount)
     console.log(dividend);
   }
-}, 10000);
+}, 1000);
 
 // const screen = document.getElementById('screen');
 // let dividendsAmount;

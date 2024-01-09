@@ -41,6 +41,10 @@ button.stockPaper {
   cursor: pointer;
 }
 
+h1.side-side {
+  display: flex;
+}
+
 div.collum {
   display: flex;
   flex-direction: column;
