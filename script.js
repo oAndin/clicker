@@ -8,9 +8,8 @@ function resetAmount() {
   stockPaper010.style.visibility = 'hidden';
   stockPaper100.style.visibility = 'hidden';
   stockAmount = 0;
-  showStockAmount = 0;
-  localStorage.setItem('stockAmount', stockAmount)
-  localStorage.setItem('showStockAmount', showStockAmount)
+  let amountStockPapers = 0;
+  showStockAmount.innerHTML = amountStockPapers;
 }
 
 resetBtn.addEventListener('click', resetAmount);
@@ -31,16 +30,13 @@ stockAmount = localStorage.getItem('stockAmount');
 // variable showing how much stocks you own
 
 
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-// Não sei porra!
 // get html element
 let showStockAmount = document.getElementById('showStockAmount');
-// save amount that im supposed to show
-showStockAmount = localStorage.getItem('stockAmount');
-// ? 
-showStockAmount.innerHTML = showStockAmount;
 
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+showStockAmount.innerHTML = parseInt(localStorage.getItem('stockAmount'));
+console.log(stockAmount);
+// save amount that im supposed to show
+
 
 // new variable to changes on the wallet 
 let updatedWallet;
@@ -60,6 +56,7 @@ function clickAddMoney() {
   if (wallet.innerHTML == 1.00) {
     stockPaper100.style.visibility = 'visible';
   }
+  showStockAmount.innerHTML = parseInt(stockAmount);
 }
 
 clickArea.addEventListener('click', clickAddMoney);
@@ -77,7 +74,6 @@ function buyAndHold010() {
     stockAmount = stockAmount + 1;
     showStockAmount.innerHTML = stockAmount;
     localStorage.setItem('stockAmount', stockAmount);
-    localStorage.setItem('showStockAmount', stockAmount);
   }
   else {
     alert("You dont have enough money!")
@@ -90,7 +86,6 @@ function buyAndHold100() {
     stockAmount = stockAmount + 10;
     showStockAmount.innerHTML = stockAmount;
     localStorage.setItem('stockAmount', stockAmount);
-    localStorage.setItem('showStockAmount', stockAmount);
   }
   else {
     alert("You dont have enough money!")
@@ -110,7 +105,7 @@ setInterval(() => {
     localStorage.setItem('stockAmount', stockAmount)
     console.log(dividend);
   }
-}, 1000);
+}, 10000);  
 
 // const screen = document.getElementById('screen');
 // let dividendsAmount;
