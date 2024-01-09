@@ -38,6 +38,17 @@ stockAmount = localStorage.getItem('stockAmount');
 // get html element
 let showStockAmount = document.getElementById('showStockAmount');
 
+// function to check if i can buy the papers
+
+function checkStockBtnVisi() {
+  if (wallet.innerHTML == 0.10) {
+    stockPaper010.style.visibility = 'visible';
+  }
+  if (wallet.innerHTML == 1.00) {
+    stockPaper100.style.visibility = 'visible';
+  }
+}
+
 showStockAmount.innerHTML = parseInt(localStorage.getItem('stockAmount'));
 console.log(stockAmount);
 // save amount that im supposed to show
@@ -55,13 +66,8 @@ function clickAddMoney() {
   updatedWallet = newValue;
   wallet.innerHTML = updatedWallet.toFixed(2);
   localStorage.setItem('wallet', wallet.innerHTML);
-  if (wallet.innerHTML == 0.10) {
-    stockPaper010.style.visibility = 'visible';
-  }
-  if (wallet.innerHTML == 1.00) {
-    stockPaper100.style.visibility = 'visible';
-  }
   showStockAmount.innerHTML = parseInt(stockAmount);
+  checkStockBtnVisi();
 }
 
 clickArea.addEventListener('click', clickAddMoney);
@@ -108,59 +114,9 @@ setInterval(() => {
     let dividend = stockAmount * 0.01;
     wallet.innerHTML = (parseFloat(wallet.innerHTML) + parseFloat(dividend)).toFixed(2);
     localStorage.setItem('stockAmount', stockAmount)
+    checkStockBtnVisi()
     console.log(dividend);
   }
 }, 10000);
-
-// const screen = document.getElementById('screen');
-// let dividendsAmount;
-// let amount = document.getElementById('amount');
-// let paper = document.getElementById('paperBuyButton');
-// paper = 0;
-
-// var currentAmount = parseFloat(amount.innerHTML);
-// amount.innerHTML = "00.00";
-// const log = document.getElementById('log')
-// log.addEventListener('click', () => console.log(paper), console.log(dividendsAmount));
-
-// screen.addEventListener('click', function handleOnClick() {
-//   // let newValue = Number(amount.innerHTML) + 1;
-//   let newValue = parseFloat(amount.innerHTML) + 0.01;
-//   amount.innerHTML = newValue.toFixed(2);
-//   currentAmount = newValue;
-//   if (currentAmount === 0.09) {
-//     paperBuyButton.style.visibility = "visible";
-//   }
-// });
-
-// paperBuyButton.addEventListener('click', buyAndHold)
-
-// function buyAndHold() {
-//   console.log('Bought');
-//   newValue = parseFloat(amount.innerHTML) - 0.10;
-//   amount.innerHTML = newValue.toFixed(2);
-//   paper++;
-//   console.log(paper);
-// }
-
-// console.log(paper);
-// // if (Number(amount.innerHTML) > Number(".09")) {
-// //   paper.style.visibility = "visible";
-// // }
-// // setInterval(() => {
-// //   let newValue = Number(amount.innerHTML) + 0.01;
-// //   amount.innerHTML = Number(newValue).toFixed(2);
-// //   currentAmount = newValue;
-// // }, 1000);
-// setInterval(() => {
-//   if (paper != 0) {
-
-//     dividendsAmount = parseFloat(paper * 0.01);
-//     newValue = newValue + dividendsAmount;
-//     amount.innerHTML = newValue.toFixed(2);
-//   }
-//   // amount.innerHTML = newValue.toFixed(2);
-//   console.log(dividendsAmount);
-// }, 1000)
 
 startSimu();
