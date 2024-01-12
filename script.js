@@ -75,9 +75,16 @@ clickArea.addEventListener('click', clickAddMoney);
 // get buy stock button
 
 const buyStockBtn010 = document.getElementById("stockPaper010");
-const buyStockBtn100 = document.getElementById("stockPaper100");
 
 // function buy papers 
+
+const quantityBtn = document.getElementById('quantityBtn');
+
+function handleBuyButton() {
+  console.log("Clickei handleBuy");
+}
+
+quantityBtn.addEventListener('click', handleBuyButton);
 
 function buyAndHold010() {
   if (wallet.innerHTML > .09) {
@@ -91,21 +98,8 @@ function buyAndHold010() {
   }
   console.log(stockAmount);
 }
-function buyAndHold100() {
-  if (wallet.innerHTML > 0.99) {
-    wallet.innerHTML = (parseFloat(wallet.innerHTML) - 1.00).toFixed(2);
-    stockAmount = stockAmount + 10;
-    showStockAmount.innerHTML = stockAmount;
-    localStorage.setItem('stockAmount', stockAmount);
-  }
-  else {
-    alert("You dont have enough money!")
-  }
-  console.log(stockAmount);
-}
 
 buyStockBtn010.addEventListener('click', buyAndHold010);
-buyStockBtn100.addEventListener('click', buyAndHold100);
 
 // function dividend 
 
