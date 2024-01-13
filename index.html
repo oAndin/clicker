@@ -9,22 +9,39 @@
 </head>
 
 <body>
-  <main class="clickArea" id="clickArea">Work!</main>
-  <button id="reset">Reset</button>
-  <section>
-    <h1 class="title">Click anywhere to get some cash!</h1>
-    <h2 class="wallet" id="wallet">00.00</h2>
-    <div class="side-side">
-      <h1 class="side-side">Stocks: <p id="showStockAmount">0</p>
-      </h1>
+  <main class="clickArea" id="clickArea">
+    <div class="info">
+      <div class="date-money">
+        <div id="date" class="date">
+          <p id="simulationDate" class="simulationDate">
+          <p id="day" class="day"></p>
+          /
+          <p id="month" class="month"></p>
+          /
+          <p id="year" class="year"></p>
+          </p>
+        </div>
+        <p>Your money: $ 00.00</p>
+      </div>
+      <p>Click here to work and get money</p>
     </div>
-    <div class="collum">
+  </main>
+  <section>
+    <div class="stockHandle">
+      <div class="side-to-side">
+        <h1 class="side-to-side">Stocks: <p id="showStockAmount">0</p>
+        </h1>
+      </div>
       <button class="quantityBtn" id="quantityBtn">
-        
+        Quantity: 1
       </button>
-      <button class="stockPaper" id="stockPaper010">
+      <button class="buyStockBtn" id="buyStockBtn">
         Buy 1 stock: $ 0.10
       </button>
+      <div class="gameMenu" id="GameMenu">
+        <button class="startBtn" id="startBtn">Start Game</button>
+        <button class="resetBtn" id="resetBtn">Reset Game</button>
+      </div>
     </div>
 
   </section>
