@@ -156,11 +156,12 @@ function handleGameStatus() {
   gameStatus = !gameStatus;
   if (gameStatus === true) {
     gameStatusBtn.innerHTML = "Pause Game";
-    timeFunction();
+    console.log(gameStatus);
   }
   if (gameStatus === false) {
     gameStatusBtn.innerHTML = "Start Game";
-    timeFunction();
+    console.log(gameStatus);
+    clearInterval(intervalGameTime);
   }
 };
 
@@ -183,26 +184,25 @@ gameYear.innerHTML = simulationYear;
 
 let timeOnClock = 0;
 function timeFunction() {
-  console.log(gameStatus);
   if (gameStatus === true) {
-    setInterval(() => {
+    const intervalGameTime = setInterval(() => {
       timeOnClock = timeOnClock + 1;
       console.log(timeOnClock);
-      console.log(gameDay.innerHTML);
-      console.log(simulationDay);
       simulationDay = simulationDay + 1;
       gameDay.innerHTML = simulationDay;
       // Month 
-      if (gameDay.innerHTML == 30 && gameMonth.innerHTML < 12) {
+      if (gameDay.innerHTML > 30 && gameMonth.innerHTML < 12) {
         simulationDay = 0;
         setTimeout(() => {
           simulationDay = simulationDay + 1;
+          gameDay.innerHTML = simulationDay;
+          simulationMonth = simulationMonth + 1;
           gameMonth.innerHTML = simulationDay;
           localStorage.setItem("month", simulationDay);
         }, 1000);
       }
       // Year
-      if (gameDay.innerHTML == 31 && gameMonth.innerHTML == 12) {
+      if (gameDay.innerHTML > 31 && gameMonth.innerHTML == 12) {
         setTimeout(() => {
           simulationDay = 1;
           simulationMonth = 1;
@@ -213,12 +213,39 @@ function timeFunction() {
       }
     }, 1000)
     localStorage.setItem("day", simulationDay);
-    if (gameStatus === false) {
-      clearInterval();
-    }
+
   }
 }
 
+
+// setInterval(() => {
+//   timeOnClock = timeOnClock + 1;
+//   console.log(timeOnClock);
+//   console.log(gameDay.innerHTML);
+//   console.log(simulationDay);
+//   simulationDay = simulationDay + 1;
+//   gameDay.innerHTML = simulationDay;
+//   // Month 
+//   if (gameDay.innerHTML == 30 && gameMonth.innerHTML < 12) {
+//     simulationDay = 0;
+//     setTimeout(() => {
+//       simulationDay = simulationDay + 1;
+//       gameMonth.innerHTML = simulationDay;
+//       localStorage.setItem("month", simulationDay);
+//     }, 1000);
+//   }
+//   // Year
+//   if (gameDay.innerHTML == 31 && gameMonth.innerHTML == 12) {
+//     setTimeout(() => {
+//       simulationDay = 1;
+//       simulationMonth = 1;
+//       simulationYear = simulationYear + 1;
+//       gameYear.innerHTML = simulationYear;
+//       localStorage.setItem("year", simulationYear);
+//     }, 1000)
+//   }
+// }, 1000)
+// localStorage.setItem("day", simulationDay);
 // reset code section
 const resetBtn = document.getElementById('resetBtn');
 resetBtn.addEventListener('click', reset);
@@ -233,6 +260,8 @@ function resetTimeMoney() {
   simulationYear = 2024;
   gameYear.innerHTML = simulationYear;
   gameStatus = false;
+  gameStatusBtn.innerHTML = "Start Game";
+
 }
 
 function reset() {
