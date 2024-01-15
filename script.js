@@ -23,7 +23,7 @@ function paymentFunction() {
   console.log("O pix caiu");
   simulationMoney = simulationMoney + workedCount;
   console.log("salario:", simulationMoney);
-  gameWallet.innerHTML = (parseFloat(simulationMoney)).toFixed(2);
+  gameWallet.innerHTML = parseFloat(gameWallet.innerHTML) + (parseFloat(simulationMoney)).toFixed(2);
 }
 
 workArea.addEventListener('click', workFunction);
@@ -125,6 +125,24 @@ function buyStocks() {
   }
 }
 
+// Dividend logic
+
+// how many stock you have will be save on this variable to be used day 30
+let stockCount;
+
+function dataComFunction() {
+  stockCount = parseInt(showStockQuantity.innerHTML)
+  console.log("stock count:", stockCount);
+}
+
+
+let dividendsPayment;
+
+function dividendsPaymentFunction() {
+  dividendsPayment = stockCount * 0.01;
+  gameWallet.innerHTML = parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment);
+}
+
 // Game conditional control   
 
 let gameStatus = false;
@@ -177,6 +195,14 @@ function timeFunction() {
     }
     if (simulationDay == 5) {
       paymentFunction();
+    }
+    if (simulationDay == 15) {
+      console.log("O pix dos dividendos!");
+      dividendsPaymentFunction();
+    }
+    if (simulationDay == 30) {
+      console.log("Data-com");
+      dataComFunction();
     }
     // Month 
     if (simulationDay == 31) {
