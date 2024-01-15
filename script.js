@@ -82,7 +82,7 @@ function buyStocks() {
       if (parseFloat(gameWallet.innerHTML) > 0.99) {
         simulationStockQuantity = simulationStockQuantity + 1;
         showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
-        gameWallet.innerHTML = parseFloat(gameWallet.innerHTML - 1)
+        gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 1)).toFixed(2);
         console.log("comprou", 1);
       }
       else {
@@ -93,7 +93,7 @@ function buyStocks() {
       if (parseFloat(gameWallet.innerHTML) > 9.99) {
         simulationStockQuantity = simulationStockQuantity + 10;
         showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
-        gameWallet.innerHTML = parseFloat(gameWallet.innerHTML - 10)
+        gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 10)).toFixed(2);
         console.log("comprou", 10);
       }
       else {
@@ -104,7 +104,7 @@ function buyStocks() {
       if (parseFloat(gameWallet.innerHTML) > 99.99) {
         simulationStockQuantity = simulationStockQuantity + 100;
         showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
-        gameWallet.innerHTML = parseFloat(gameWallet.innerHTML - 100)
+        gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 100)).toFixed(2);
         console.log("comprou", 100);
       }
       else {
@@ -115,7 +115,7 @@ function buyStocks() {
       if (parseFloat(gameWallet.innerHTML) > 999.99) {
         simulationStockQuantity = simulationStockQuantity + 1000;
         showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
-        gameWallet.innerHTML = parseFloat(gameWallet.innerHTML - 1000)
+        gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 1000)).toFixed(2);
         console.log("comprou", 1000);
       }
       else {
@@ -136,11 +136,11 @@ function dataComFunction() {
 }
 
 
-let dividendsPayment;
 
 function dividendsPaymentFunction() {
-  dividendsPayment = stockCount * 0.01;
-  gameWallet.innerHTML = parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment);
+  let dividendsPayment = stockCount * 0.01;
+  console.log(dividendsPayment);
+  gameWallet.innerHTML = parseFloat(dividendsPayment) + parseFloat(gameWallet.innerHTML);
 }
 
 // Game conditional control   
