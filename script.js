@@ -1,10 +1,9 @@
 // Wallet control
 
 const gameWallet = document.getElementById("walletInGame");
-let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0;
+let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0.00;
 let workedCount = 0;
-gameWallet.innerHTML = "1000.00";
-
+gameWallet.innerHTML = (simulationMoney).toFixed(2);
 const workArea = document.getElementById('clickArea');
 
 function workFunction() {
@@ -15,20 +14,29 @@ function workFunction() {
       :
       ''
   } else {
-    workedCount = workedCount + parseFloat(0.01);
+    workedCount = workedCount + 0.01;
+    console.log(workedCount);
   };
 }
 
+// !
+
 function paymentFunction() {
+  // 1 payment : SimulationMoney = 0; WorkedCount = 0.30;
+  // 2 payment : SimulationMoney = 0.30; WorkedCount = 0.70;
+  // 3 payment : SimulationMoney = 1.00; WorkedCount = 0.70;
+  console.log("antes:", simulationMoney);
+  simulationMoney += workedCount;
+  workedCount = 0;
+  console.log("depois:", simulationMoney);
   console.log("O pix caiu");
-  simulationMoney = simulationMoney + workedCount;
   console.log("salario:", simulationMoney);
-  gameWallet.innerHTML = parseFloat(gameWallet.innerHTML) + (parseFloat(simulationMoney)).toFixed(2);
+  gameWallet.innerHTML = (parseFloat(simulationMoney) + parseFloat(gameWallet.innerHTML)).toFixed(2);
 }
 
 workArea.addEventListener('click', workFunction);
 
-// Stock control 
+// Stock control
 
 const showStockQuantity = document.getElementById("showStockAmount");
 let simulationStockQuantity = 0;
@@ -50,16 +58,16 @@ function handleQuantity() {
   stockQuantity.innerHTML = `Stock quantity: ${quantity[currentIndexOf]}`;
   switch (currentIndexOf) {
     case 0:
-      price = "$ 1.00"
+      price = "$ 1.00";
       break;
     case 1:
-      price = "$ 10.00"
+      price = "$ 10.00";
       break;
     case 2:
-      price = "$ 100.00"
+      price = "$ 100.00";
       break;
     case 3:
-      price = "$ 1000.00"
+      price = "$ 1000.00";
       break;
     default:
       console.log("?");
@@ -128,17 +136,18 @@ function buyStocks() {
 // Dividend logic
 
 // how many stock you have will be save on this variable to be used day 30
-let stockCount;
+let stockCount = 0;
 
 function dataComFunction() {
-  stockCount = parseInt(showStockQuantity.innerHTML)
-  console.log("stock count:", stockCount);
+  stockCount = simulationStockQuantity;
+  console.log(stockCount);
+  // console.log("stock count:", stockCount);
 }
 
 function dividendsPaymentFunction() {
   let dividendsPayment = stockCount * 0.01;
   console.log(dividendsPayment);
-  gameWallet.innerHTML = parseFloat(dividendsPayment) + parseFloat(gameWallet.innerHTML);
+  gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
 }
 
 // Game conditional control   
@@ -187,16 +196,14 @@ function timeFunction() {
     simulationDay = parseInt(simulationDay) + 1;
     gameDay.innerHTML = simulationDay;
     localStorage.setItem("day", simulationDay)
-    if (simulationDay == 4) {
-      simulationMoney = parseFloat(gameWallet.innerHTML);
-      console.log(simulationMoney, gameWallet.innerHTML);
-    }
     if (simulationDay == 5) {
       paymentFunction();
     }
     if (simulationDay == 15) {
-      console.log("O pix dos dividendos!");
-      dividendsPaymentFunction();
+      if (simulationStockQuantity != 0) {
+        console.log("O pix dos dividendos!");
+        dividendsPaymentFunction();
+      }
     }
     if (simulationDay == 30) {
       console.log("Data-com");
@@ -244,6 +251,9 @@ function resetTimeMoney() {
   gameStatusBtn.innerHTML = "Start Game";
   simulationMoney = 0;
   gameWallet.innerHTML = "00.00";
+  simulationStockQuantity = 0;
+  showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+  workedCount = 0;
   stopTimeFunction();
 }
 
