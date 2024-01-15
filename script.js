@@ -135,8 +135,6 @@ function dataComFunction() {
   console.log("stock count:", stockCount);
 }
 
-
-
 function dividendsPaymentFunction() {
   let dividendsPayment = stockCount * 0.01;
   console.log(dividendsPayment);
@@ -256,3 +254,12 @@ function reset() {
     :
     alert("Nothing changed!");
 }
+
+/* 
+-> To Do List
+
+FIX WALLET innerHTML on payment day 
+
+FIX DIVIDENDS NaN on dividendsPaymentFunction
+
+*/ 
