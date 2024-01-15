@@ -111,3 +111,10 @@ button.statusBtn:hover {
   background-color: #0000cc;
   color: #fff;
 }
+
+/* Money style section */
+
+div.walletDiv {
+  display: flex;
+  gap: 0.3rem;
+}

@@ -145,6 +145,57 @@
 
 // -----------------------------------------------------------------------------------------------------------------------------
 
+// Wallet control
+
+const gameWallet = document.getElementById("walletInGame");
+let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0;
+let workedCount = 0;
+gameWallet.innerHTML = "00.00";
+
+const workArea = document.getElementById('clickArea');
+
+function workFunction() {
+  if (gameStatus === false) {
+    confirm("You can't work when the game isn't running, start game?")
+      ?
+      handleGameStatus()
+      :
+      ''
+  } else {
+    workedCount = workedCount + parseFloat(0.01);
+  };
+}
+
+function paymentFunction() {
+  console.log("O pix caiu");
+  simulationMoney = simulationMoney + workedCount;
+  console.log("salario:", simulationMoney);
+  gameWallet.innerHTML = (parseFloat(simulationMoney)).toFixed(2);
+}
+
+workArea.addEventListener('click', workFunction);
+
+
+// Stock control 
+
+// stock button swtich 
+
+const stockQuantity = document.getElementById('quantityBtn');
+
+let quantity = [1, 10, 100, 1000];
+let arrayQuantity = quantity.length;
+let currentIndexOf = 0;
+
+function handleQuantity() {
+  currentIndexOf = currentIndexOf + 1;
+  if (currentIndexOf == quantity.length) {
+    currentIndexOf = 0;
+  }
+  stockQuantity.innerHTML = `Buy stocks: ${quantity[currentIndexOf]}`;
+}
+
+stockQuantity.addEventListener('click', handleQuantity);
+
 // Game conditional control   
 
 let gameStatus = false;
@@ -186,22 +237,24 @@ gameYear.innerHTML = simulationYear;
 let timeOnClock = 0;
 function timeFunction() {
   intervalGameTimeId = setInterval(() => {
-    console.log(timeOnClock);
+    // console.log(timeOnClock);
     timeOnClock = timeOnClock + 1;
     simulationDay = parseInt(simulationDay) + 1;
     gameDay.innerHTML = simulationDay;
+    console.log("day:", simulationDay);
+    if (simulationDay == 5) {
+      paymentFunction();
+    }
     // Month 
-    if (simulationDay > 30) {
-      simulationDay = 0;
+    if (simulationDay == 31) {
+      simulationDay = 1;
+      gameDay.innerHTML = simulationDay;
       simulationMonth = parseInt(simulationMonth) + 1;
       gameMonth.innerHTML = simulationMonth;
-      console.log(simulationMonth);
-      // setTimeout(() => {
-      // }, 1000);
       localStorage.setItem("month", simulationDay);
     }
     // Year
-    if (simulationDay > 31 && simulationMonth > 12) {
+    if (simulationMonth > 12) {
       setTimeout(() => {
         simulationDay = 1;
         simulationMonth = 1;
@@ -217,35 +270,6 @@ function timeFunction() {
 function stopTimeFunction() {
   clearInterval(intervalGameTimeId);
 };
-
-// setInterval(() => {
-//   timeOnClock = timeOnClock + 1;
-//   console.log(timeOnClock);
-//   console.log(gameDay.innerHTML);
-//   console.log(simulationDay);
-//   simulationDay = simulationDay + 1;
-//   gameDay.innerHTML = simulationDay;
-//   // Month 
-//   if (gameDay.innerHTML == 30 && gameMonth.innerHTML < 12) {
-//     simulationDay = 0;
-//     setTimeout(() => {
-//       simulationDay = simulationDay + 1;
-//       gameMonth.innerHTML = simulationDay;
-//       localStorage.setItem("month", simulationDay);
-//     }, 1000);
-//   }
-//   // Year
-//   if (gameDay.innerHTML == 31 && gameMonth.innerHTML == 12) {
-//     setTimeout(() => {
-//       simulationDay = 1;
-//       simulationMonth = 1;
-//       simulationYear = simulationYear + 1;
-//       gameYear.innerHTML = simulationYear;
-//       localStorage.setItem("year", simulationYear);
-//     }, 1000)
-//   }
-// }, 1000)
-// localStorage.setItem("day", simulationDay);
 // reset code section
 const resetBtn = document.getElementById('resetBtn');
 resetBtn.addEventListener('click', reset);
@@ -261,6 +285,8 @@ function resetTimeMoney() {
   gameYear.innerHTML = simulationYear;
   gameStatus = false;
   gameStatusBtn.innerHTML = "Start Game";
+  simulationMoney = 0;
+  gameWallet.innerHTML = "00.00";
   stopTimeFunction();
 }
 
@@ -271,7 +297,3 @@ function reset() {
     :
     alert("Nothing changed!");
 };
-
-
-// Start game 
-
