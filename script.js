@@ -3,7 +3,7 @@
 const gameWallet = document.getElementById("walletInGame");
 let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0.00;
 let workedCount = 0;
-gameWallet.innerHTML = (simulationMoney).toFixed(2);
+gameWallet.innerHTML = '0.00';
 const workArea = document.getElementById('clickArea');
 
 function workFunction() {
@@ -25,14 +25,18 @@ function paymentFunction() {
   // 1 payment : SimulationMoney = 0; WorkedCount = 0.30;
   // 2 payment : SimulationMoney = 0.30; WorkedCount = 0.70;
   // 3 payment : SimulationMoney = 1.00; WorkedCount = 0.70;
+
+  // 1º Get the wallet.innerHTML
+  let payment = 0;
+  simulationMoney = (parseFloat(gameWallet.innerHTML)).toFixed(2);
   console.log("antes:", simulationMoney);
-  simulationMoney += workedCount;
-  workedCount = 0;
+  simulationMoney = (parseFloat(simulationMoney) + workedCount).toFixed(2);
   console.log("depois:", simulationMoney);
-  console.log("O pix caiu");
-  console.log("salario:", simulationMoney);
-  console.log(parseFloat(gameWallet.innerHTML).toFixed(2));
-  gameWallet.innerHTML = (parseFloat(simulationMoney).toFixed(2));
+  payment = (parseFloat(simulationMoney)).toFixed(2);
+  gameWallet.innerHTML = (parseFloat(payment)).toFixed(2);
+  simulationMoney = 0;
+  workedCount = 0;
+  payment = 0;
 }
 
 workArea.addEventListener('click', workFunction);
@@ -197,7 +201,7 @@ function timeFunction() {
     simulationDay = parseInt(simulationDay) + 1;
     gameDay.innerHTML = simulationDay;
     localStorage.setItem("day", simulationDay)
-    if (simulationDay == 5) {
+    if (simulationDay == 4) {
       paymentFunction();
     }
     if (simulationDay == 15) {
