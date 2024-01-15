@@ -157,11 +157,12 @@ function handleGameStatus() {
   if (gameStatus === true) {
     gameStatusBtn.innerHTML = "Pause Game";
     console.log(gameStatus);
+    timeFunction();
   }
   if (gameStatus === false) {
     gameStatusBtn.innerHTML = "Start Game";
     console.log(gameStatus);
-    clearInterval(intervalGameTime);
+    stopTimeFunction();
   }
 };
 
@@ -184,39 +185,38 @@ gameYear.innerHTML = simulationYear;
 
 let timeOnClock = 0;
 function timeFunction() {
-  if (gameStatus === true) {
-    const intervalGameTime = setInterval(() => {
-      timeOnClock = timeOnClock + 1;
-      console.log(timeOnClock);
-      simulationDay = simulationDay + 1;
-      gameDay.innerHTML = simulationDay;
-      // Month 
-      if (gameDay.innerHTML > 30 && gameMonth.innerHTML < 12) {
-        simulationDay = 0;
-        setTimeout(() => {
-          simulationDay = simulationDay + 1;
-          gameDay.innerHTML = simulationDay;
-          simulationMonth = simulationMonth + 1;
-          gameMonth.innerHTML = simulationDay;
-          localStorage.setItem("month", simulationDay);
-        }, 1000);
-      }
-      // Year
-      if (gameDay.innerHTML > 31 && gameMonth.innerHTML == 12) {
-        setTimeout(() => {
-          simulationDay = 1;
-          simulationMonth = 1;
-          simulationYear = simulationYear + 1;
-          gameYear.innerHTML = simulationYear;
-          localStorage.setItem("year", simulationYear);
-        }, 1000)
-      }
-    }, 1000)
-    localStorage.setItem("day", simulationDay);
-
-  }
+  intervalGameTimeId = setInterval(() => {
+    console.log(timeOnClock);
+    timeOnClock = timeOnClock + 1;
+    simulationDay = parseInt(simulationDay) + 1;
+    gameDay.innerHTML = simulationDay;
+    // Month 
+    if (simulationDay > 30) {
+      simulationDay = 0;
+      simulationMonth = parseInt(simulationMonth) + 1;
+      gameMonth.innerHTML = simulationMonth;
+      console.log(simulationMonth);
+      // setTimeout(() => {
+      // }, 1000);
+      localStorage.setItem("month", simulationDay);
+    }
+    // Year
+    if (simulationDay > 31 && simulationMonth > 12) {
+      setTimeout(() => {
+        simulationDay = 1;
+        simulationMonth = 1;
+        simulationYear = simulationYear + 1;
+        gameYear.innerHTML = simulationYear;
+        localStorage.setItem("year", simulationYear);
+      }, 1000)
+    }
+  }, 1000)
+  localStorage.setItem("day", simulationDay);
 }
 
+function stopTimeFunction() {
+  clearInterval(intervalGameTimeId);
+};
 
 // setInterval(() => {
 //   timeOnClock = timeOnClock + 1;
@@ -261,7 +261,7 @@ function resetTimeMoney() {
   gameYear.innerHTML = simulationYear;
   gameStatus = false;
   gameStatusBtn.innerHTML = "Start Game";
-
+  stopTimeFunction();
 }
 
 function reset() {
