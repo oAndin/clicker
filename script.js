@@ -31,7 +31,8 @@ function paymentFunction() {
   console.log("depois:", simulationMoney);
   console.log("O pix caiu");
   console.log("salario:", simulationMoney);
-  gameWallet.innerHTML = (parseFloat(simulationMoney) + parseFloat(gameWallet.innerHTML)).toFixed(2);
+  console.log(parseFloat(gameWallet.innerHTML).toFixed(2));
+  gameWallet.innerHTML = (parseFloat(simulationMoney).toFixed(2));
 }
 
 workArea.addEventListener('click', workFunction);
