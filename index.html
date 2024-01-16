@@ -5,30 +5,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clicker captalista</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./src/css/style.css">
 </head>
 
 <body>
-  <main class="clickArea" id="clickArea">Work!</main>
-  <section>
-    <h1 class="title">Click anywhere to get some cash!</h1>
-    <h2 class="wallet" id="wallet">00.00</h2>
-    <div class="side-side">
-      <h1 class="side-side">Stocks: <p id="showStockAmount">0</p>
-      </h1>
+  <main class="clickArea" id="clickArea">
+    <div class="info">
+      <div class="date-money">
+        <div id="date" class="date">
+          <p id="simulationDate" class="simulationDate">
+          <p id="day" class="day"></p>
+          /
+          <p id="month" class="month"></p>
+          /
+          <p id="year" class="year"></p>
+          </p>
+        </div>
+        <div id="walletDiv" class="walletDiv">
+          <p>Your money: $
+          <p id="walletInGame"></p>
+          </p>
+        </div>
+        <p>Click here to work and get money</p>
+        <p>You get pay on the fifth day</p>
+      </div>
     </div>
-    <div class="collum">
-      <button class="stockPaper" id="stockPaper010">
+  </main>
+  <section>
+    <button id="showStats" class="showStats">Show stats</button>
+    <div class="gameStatus" id="gameStatusDiv">
+      <div>Salario recebido no total: <p id="totalSalary">SALARIO</p>
+      </div>
+      <div>Dividendos recebido no total: <p id="totalDividends">DIVIDENDOS</p>
+      </div>
+    </div>
+    <div class="stockHandle">
+      <div class="side-to-side">
+        <h1 id="showStockAmount">
+          0
+        </h1>
+      </div>
+      <button class="quantityBtn" id="quantityBtn">
+      </button>
+      <button class="buyStockBtn" id="buyStockBtn">
         Buy 1 stock: $ 0.10
       </button>
-      <button class="stockPaper" id="stockPaper100">
-        Buy 10 stock:
-        $ 1.00
-      </button>
+      <div class="gameMenu" id="GameMenu">
+        <button class="statusBtn" id="statusBtn"></button>
+        <button class="difficulty" id="difficulty">Game Mode: Normal (CLT)</button>
+        <button class="resetBtn" id="resetBtn">Reset Game</button>
+      </div>
     </div>
-    <button id="reset">Reset</button>
+
   </section>
-  <script src="./script.js"></script>
+  <script src="./src/js/script.js"></script>
 </body>
 
 </html>
