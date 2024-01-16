@@ -88,7 +88,8 @@ section div.gameMenu {
   gap: 1rem;
 }
 
-button.resetBtn {
+button.resetBtn,
+button.difficulty {
   border-radius: 4px;
   background-color: #fff;
   color: #000;
@@ -98,6 +99,11 @@ button.resetBtn {
 button.resetBtn:hover {
   background-color: red;
   color: #fff;
+}
+
+button.difficulty:hover {
+  background-color: #eeff00;
+  color: #000;
 }
 
 button.statusBtn {
@@ -117,4 +123,22 @@ button.statusBtn:hover {
 div.walletDiv {
   display: flex;
   gap: 0.3rem;
+}
+
+/* Stats style */
+
+button.showStats {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+
+div.gameStatus {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+  padding: 1rem;
+  border-radius: 8px;
+  visibility: hidden;
+  background-color: #fff;
 }

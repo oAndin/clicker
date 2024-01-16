@@ -6,7 +6,7 @@
 
 const gameWallet = document.getElementById("walletInGame");
 let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0.00;
-let workedCount = 0;
+let workedCount = localStorage.getItem('workedCount') ? localStorage.getItem('workedCount') : 0;
 gameWallet.innerHTML = simulationMoney;
 const workArea = document.getElementById('clickArea');
 
@@ -23,14 +23,7 @@ function workFunction() {
   };
 }
 
-// !
-
 function paymentFunction() {
-  // 1 payment : SimulationMoney = 0; WorkedCount = 0.30;
-  // 2 payment : SimulationMoney = 0.30; WorkedCount = 0.70;
-  // 3 payment : SimulationMoney = 1.00; WorkedCount = 0.70;
-
-  // 1º Get the wallet.innerHTML
   let payment = 0;
   simulationMoney = (parseFloat(gameWallet.innerHTML)).toFixed(2);
   console.log("antes:", simulationMoney);
@@ -143,10 +136,6 @@ function buyStocks() {
 }
 
 // Dividend logic
-
-// how many stock you have will be save on this variable to be used day 30
-let stockCount = localStorage.getItem('stocks') ? localStorage.getItem('stocks') : 0;
-
 function dataComFunction() {
   stockCount = simulationStockQuantity;
   console.log("data-com:", simulationStockQuantity);
@@ -198,6 +187,7 @@ gameYear.innerHTML = simulationYear;
 
 function checkpoint() {
   localStorage.setItem('money', simulationMoney);
+  localStorage.setItem('workedCount', workedCount);
   localStorage.setItem('simuStocks', parseInt(simulationStockQuantity));
   localStorage.setItem('day', simulationDay);
   localStorage.setItem('month', simulationMonth);
@@ -285,3 +275,31 @@ function reset() {
     :
     alert("Nothing changed!");
 }
+
+// Show Stats
+
+const showStatsBtn = document.getElementById('showStats');
+const showStatsDiv = document.getElementById('gameStatusDiv');
+
+function showStatsFunction() {
+  alert("Future feature!")
+  if (showStatsDiv.style.visibility == 'visible') {
+    showStatsDiv.style.visibility = 'hidden';
+  }
+  else {
+    showStatsDiv.style.visibility = 'visible'
+  }
+};
+
+showStatsBtn.addEventListener('click', showStatsFunction);
+
+// Difficulty mode control
+
+const difficultyBtn = document.getElementById("difficulty");
+
+function handleDifficulty() {
+  alert('Future feature!');
+};
+
+difficultyBtn.addEventListener('click', handleDifficulty);
+
