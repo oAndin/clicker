@@ -1,3 +1,6 @@
+// import swal from 'sweetalert';
+
+// swal('Hello!');
 
 // Wallet control
 
