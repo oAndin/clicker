@@ -42,7 +42,7 @@ workArea.addEventListener('click', workFunction);
 
 const showStockQuantity = document.getElementById("showStockAmount");
 let simulationStockQuantity = localStorage.getItem('simuStocks') ? localStorage.getItem('simuStocks') : 0;
-showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
 
 // stock button swtich 
 
@@ -90,8 +90,8 @@ function buyStocks() {
   switch (currentIndexOf) {
     case 0:
       if (parseFloat(gameWallet.innerHTML) > 0.99) {
-        simulationStockQuantity = parseInt(simulationStockQuantity + 1);
-        showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+        simulationStockQuantity = (parseInt(simulationStockQuantity) + 1);
+        showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 1)).toFixed(2);
         console.log("comprou", 1);
       }
@@ -101,8 +101,8 @@ function buyStocks() {
       break;
     case 1:
       if (parseFloat(gameWallet.innerHTML) > 9.99) {
-        simulationStockQuantity = parseInt(simulationStockQuantity + 10);
-        showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 10);
+        showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 10)).toFixed(2);
         console.log("comprou", 10);
       }
@@ -112,8 +112,8 @@ function buyStocks() {
       break;
     case 2:
       if (parseFloat(gameWallet.innerHTML) > 99.99) {
-        simulationStockQuantity = parseInt(simulationStockQuantity + 100);
-        showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 100);
+        showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 100)).toFixed(2);
         console.log("comprou", 100);
       }
@@ -123,8 +123,8 @@ function buyStocks() {
       break;
     case 3:
       if (parseFloat(gameWallet.innerHTML) > 999.99) {
-        simulationStockQuantity = parseInt(simulationStockQuantity + 1000);
-        showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 1000);
+        showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 1000)).toFixed(2);
         console.log("comprou", 1000);
       }
@@ -141,9 +141,9 @@ function dataComFunction() {
 }
 
 function dividendsPaymentFunction() {
-  let dividendsPayment = simulationStockQuantity * 0.01;
+  let dividendsPayment = parseInt(simulationStockQuantity) * 0.01;
   console.log(dividendsPayment);
-  showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+  showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
   gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
 }
 
@@ -188,7 +188,7 @@ gameYear.innerHTML = simulationYear;
 function checkpoint() {
   localStorage.setItem('money', simulationMoney);
   localStorage.setItem('workedCount', workedCount);
-  localStorage.setItem('simuStocks', parseInt(simulationStockQuantity));
+  localStorage.setItem('simuStocks', (simulationStockQuantity));
   localStorage.setItem('day', simulationDay);
   localStorage.setItem('month', simulationMonth);
   localStorage.setItem('year', simulationYear);
@@ -267,7 +267,7 @@ function resetTimeMoney() {
   simulationMoney = 0;
   gameWallet.innerHTML = "00.00";
   simulationStockQuantity = 0;
-  showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+  showStockQuantity.innerHTML = "Stocks:" + simulationStockQuantity;
   workedCount = 0;
   stopTimeFunction();
 }
@@ -309,7 +309,9 @@ difficultyBtn.addEventListener('click', handleDifficulty);
 
 
 function loadFunction() {
-  showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+  showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
 };
 
+console.log(typeof (simulationStockQuantity))
+console.log(simulationStockQuantity);;
 window.addEventListener('load', loadFunction);
