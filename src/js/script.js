@@ -307,3 +307,9 @@ function handleDifficulty() {
 
 difficultyBtn.addEventListener('click', handleDifficulty);
 
+
+function loadFunction() {
+  showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
+};
+
+window.addEventListener('load', loadFunction);
