@@ -1,9 +1,10 @@
+
 // Wallet control
 
 const gameWallet = document.getElementById("walletInGame");
 let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0.00;
 let workedCount = 0;
-gameWallet.innerHTML = '0.00';
+gameWallet.innerHTML = simulationMoney;
 const workArea = document.getElementById('clickArea');
 
 function workFunction() {
@@ -14,7 +15,7 @@ function workFunction() {
       :
       ''
   } else {
-    workedCount = workedCount + 0.01;
+    workedCount = workedCount + 0.10;
     console.log(workedCount);
   };
 }
@@ -44,7 +45,7 @@ workArea.addEventListener('click', workFunction);
 // Stock control
 
 const showStockQuantity = document.getElementById("showStockAmount");
-let simulationStockQuantity = 0;
+let simulationStockQuantity = localStorage.getItem('simuStocks') ? localStorage.getItem('simuStocks') : 0;
 showStockQuantity.innerHTML = `Stocks: ${simulationStockQuantity}`;
 
 // stock button swtich 
@@ -141,12 +142,11 @@ function buyStocks() {
 // Dividend logic
 
 // how many stock you have will be save on this variable to be used day 30
-let stockCount = 0;
+let stockCount = localStorage.getItem('stocks') ? localStorage.getItem('stocks') : 0;
 
 function dataComFunction() {
   stockCount = simulationStockQuantity;
-  console.log(stockCount);
-  // console.log("stock count:", stockCount);
+  console.log("data-com:", simulationStockQuantity);
 }
 
 function dividendsPaymentFunction() {
@@ -191,16 +191,27 @@ gameMonth.innerHTML = simulationMonth;
 let simulationYear = localStorage.getItem('year') ? localStorage.getItem('year') : 2024;
 gameYear.innerHTML = simulationYear;
 
+// Chckpoint game function
+
+function checkpoint() {
+  localStorage.setItem('money', simulationMoney);
+  localStorage.setItem('simuStocks', parseInt(simulationStockQuantity));
+  localStorage.setItem('day', simulationDay);
+  localStorage.setItem('month', simulationMonth);
+  localStorage.setItem('year', simulationYear);
+}
+
 // Clock game running
 
 let timeOnClock = 0;
 function timeFunction() {
   intervalGameTimeId = setInterval(() => {
-    // console.log(timeOnClock);
     timeOnClock = timeOnClock + 1;
     simulationDay = parseInt(simulationDay) + 1;
     gameDay.innerHTML = simulationDay;
+    checkpoint();
     localStorage.setItem("day", simulationDay)
+    localStorage.setItem('money', (parseFloat(gameWallet.innerText)).toFixed(2));
     if (simulationDay == 4) {
       paymentFunction();
     }
@@ -215,7 +226,7 @@ function timeFunction() {
       dataComFunction();
     }
     // Month 
-    if (simulationDay == 31) {
+    if (simulationDay == 31 && simulationMonth != 12) {
       simulationDay = 1;
       gameDay.innerHTML = simulationDay;
       simulationMonth = parseInt(simulationMonth) + 1;
@@ -223,14 +234,16 @@ function timeFunction() {
       localStorage.setItem("month", simulationDay);
     }
     // Year
-    if (simulationMonth > 12) {
-      setTimeout(() => {
-        simulationDay = 1;
-        simulationMonth = 1;
-        simulationYear = simulationYear + 1;
-        gameYear.innerHTML = simulationYear;
-        localStorage.setItem("year", simulationYear);
-      }, 1000)
+    if (simulationMonth == 12 && simulationDay == 31) {
+      console.log("Happy New Years!");
+      simulationDay = 1;
+      gameDay.innerHTML = simulationDay;
+      simulationMonth = 1;
+      gameMonth.innerHTML = simulationMonth;
+      simulationYear = simulationYear + 1;
+      console.log(simulationMonth);
+      gameYear.innerHTML = simulationYear;
+      localStorage.setItem("year", simulationYear);
     }
   }, 1000)
   localStorage.setItem("day", simulationDay);
@@ -269,12 +282,3 @@ function reset() {
     :
     alert("Nothing changed!");
 }
-
-/* 
--> To Do List
-
-FIX WALLET innerHTML on payment day 
-
-FIX DIVIDENDS NaN on dividendsPaymentFunction
-
-*/ 
