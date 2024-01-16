@@ -1,15 +1,16 @@
 
 // button reset ammount
+
 const resetBtn = document.getElementById('reset');
 
 function resetAmount() {
   wallet.innerHTML = ("00.00");
-  localStorage.setItem('wallet', wallet.innerHTML);
   stockPaper010.style.visibility = 'hidden';
   stockPaper100.style.visibility = 'hidden';
   stockAmount = 0;
   let amountStockPapers = 0;
-  showStockAmount.innerHTML = amountStockPapers;
+  localStorage.clear();
+  showStockAmount.innerHTML = parseInt(amountStockPapers);
 }
 
 resetBtn.addEventListener('click', resetAmount);
@@ -19,24 +20,19 @@ let wallet = document.getElementById('wallet');
 // give the variable the start amount
 wallet.innerHTML = (localStorage.getItem('wallet'));
 
-// variable stock paper
-const stockPaper010 = document.getElementById('stockPaper010');
-
 // variable stock amount
-
 let stockAmount = localStorage.getItem('stockAmount');
 stockAmount = localStorage.getItem('stockAmount');
 
-// variable showing how much stocks you own
-
+// variable stock paper
+const stockPaper010 = document.getElementById('stockPaper010');
 
 // get html element
-let showStockAmount = document.getElementById('showStockAmount');
-
-showStockAmount.innerHTML = parseInt(localStorage.getItem('stockAmount'));
-console.log(stockAmount);
-// save amount that im supposed to show
-
+let showStockAmount = document.getElementB
+yId('showStockAmount');
+console.log(showStockAmount.innerHTML);
+// variable showing how much stocks you own
+showStockAmount.innerHTML = localStorage.getItem('stockAmount');
 
 // new variable to changes on the wallet 
 let updatedWallet;
@@ -46,9 +42,11 @@ let clickArea = document.getElementById('clickArea')
 
 // create the function and make it work!
 function clickAddMoney() {
+  console.log(wallet.innerHTML);
+  console.log(stockAmount);
   let newValue = parseFloat(wallet.innerHTML) + 0.01;
   updatedWallet = newValue;
-  wallet.innerHTML = updatedWallet.toFixed(2);
+  wallet.innerHTML = (updatedWallet).toFixed(2);
   localStorage.setItem('wallet', wallet.innerHTML);
   if (wallet.innerHTML == 0.10) {
     stockPaper010.style.visibility = 'visible';
@@ -103,10 +101,12 @@ setInterval(() => {
     let dividend = stockAmount * 0.01;
     wallet.innerHTML = (parseFloat(wallet.innerHTML) + parseFloat(dividend)).toFixed(2);
     localStorage.setItem('stockAmount', stockAmount)
+
     console.log(dividend);
   }
-}, 10000);  
-
+}, 10000);
+console.log(stockAmount);
+console.log(wallet.innerHTML);
 // const screen = document.getElementById('screen');
 // let dividendsAmount;
 // let amount = document.getElementById('amount');
