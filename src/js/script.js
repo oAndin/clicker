@@ -2,6 +2,36 @@
 
 // swal('Hello!');
 
+// salary variable to change game mode
+
+let salary = 0.25;
+
+// total stats 
+
+const totalSalary = document.getElementById('totalSalary');
+const totalDividends = document.getElementById('totalDividends');
+
+let totalClickPayment = localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : 0;
+let totalDividendsStats = localStorage.getItem('totalDividendsStorage') ? localStorage.getItem('totalDividendsStorage') : 0;
+
+function totalClickPaymentFunction() {
+  totalClickPayment = parseFloat(parseFloat(totalClickPayment) + parseFloat(salary)).toFixed(2);
+  console.log(totalClickPayment);
+  localStorage.setItem('totalClickPayment', totalClickPayment);
+  totalSalary.innerHTML =
+    localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : "$ " + totalClickPayment;
+}
+
+function totalDividendsPaymentFunction() {
+  totalDividendsStats = localStorage.getItem('totalDividendsStorage') ?
+    localStorage.getItem('totalDividendsStorage')
+    :
+    totalDividendsStats;
+  localStorage.setItem('totalDividendsStorage', totalDividendsStats);
+  totalDividends.innerHTML = localStorage.getItem('totalDividendsStorage') ?
+    localStorage.getItem('totalDividendsStorage')
+    : totalDividendsStats;
+}
 // Wallet control
 
 const gameWallet = document.getElementById("walletInGame");
@@ -18,19 +48,19 @@ function workFunction() {
       :
       ''
   } else {
-    workedCount = parseFloat(workedCount + 1.00);
+    workedCount = parseFloat(workedCount + salary);
     console.log(workedCount);
+    totalClickPaymentFunction();
   };
 }
 
 function paymentFunction() {
   let payment = 0;
-  simulationMoney = (parseFloat(gameWallet.innerHTML)).toFixed(2);
   console.log("antes:", simulationMoney);
-  simulationMoney = (parseFloat(simulationMoney) + workedCount).toFixed(2);
+  simulationMoney = parseFloat(simulationMoney + workedCount).toFixed(2);
   console.log("depois:", simulationMoney);
   payment = (parseFloat(simulationMoney)).toFixed(2);
-  gameWallet.innerHTML = (parseFloat(payment)).toFixed(2);
+  gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + (parseFloat(payment))).toFixed(2);
   simulationMoney = 0;
   workedCount = 0;
   payment = 0;
@@ -101,7 +131,7 @@ function buyStocks() {
       break;
     case 1:
       if (parseFloat(gameWallet.innerHTML) > 9.99) {
-        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 10);
+        simulationStockQuantity = (parseInt(simulationStockQuantity) + 10);
         showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 10)).toFixed(2);
         console.log("comprou", 10);
@@ -112,7 +142,7 @@ function buyStocks() {
       break;
     case 2:
       if (parseFloat(gameWallet.innerHTML) > 99.99) {
-        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 100);
+        simulationStockQuantity = (parseInt(simulationStockQuantity) + 100);
         showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 100)).toFixed(2);
         console.log("comprou", 100);
@@ -123,7 +153,7 @@ function buyStocks() {
       break;
     case 3:
       if (parseFloat(gameWallet.innerHTML) > 999.99) {
-        parseInt(simulationStockQuantity) = (parseInt(simulationStockQuantity) + 1000);
+        simulationStockQuantity = (parseInt(simulationStockQuantity) + 1000);
         showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
         gameWallet.innerHTML = (parseFloat(gameWallet.innerHTML - 1000)).toFixed(2);
         console.log("comprou", 1000);
@@ -143,8 +173,11 @@ function dataComFunction() {
 function dividendsPaymentFunction() {
   let dividendsPayment = parseInt(simulationStockQuantity) * 0.01;
   console.log(dividendsPayment);
+  console.log("Caiu o PIX dos dividendos: ", dividendsPayment);
   showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
   gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
+  totalDividendsStats = parseFloat(totalDividendsStats + dividendsPayment);
+  totalDividendsPaymentFunction();
 }
 
 // Game conditional control   
@@ -210,12 +243,11 @@ function timeFunction() {
     }
     if (simulationDay == 15) {
       if (simulationStockQuantity != 0) {
-        console.log("O pix dos dividendos!");
         dividendsPaymentFunction();
+        totalDividendsPaymentFunction();
       }
     }
     if (simulationDay == 30) {
-      console.log("Data-com");
       dataComFunction();
     }
     // Month 
@@ -269,6 +301,11 @@ function resetTimeMoney() {
   simulationStockQuantity = 0;
   showStockQuantity.innerHTML = "Stocks:" + simulationStockQuantity;
   workedCount = 0;
+  totalClickPayment = 0;
+  totalSalary.innerHTML = "$ 0.00";
+  totalDividendsStats = 0;
+  totalDividends.innerHTML = "$ 0.00";
+
   stopTimeFunction();
 }
 
@@ -286,7 +323,6 @@ const showStatsBtn = document.getElementById('showStats');
 const showStatsDiv = document.getElementById('gameStatusDiv');
 
 function showStatsFunction() {
-  alert("Future feature!")
   if (showStatsDiv.style.visibility == 'visible') {
     showStatsDiv.style.visibility = 'hidden';
   }
@@ -309,9 +345,9 @@ difficultyBtn.addEventListener('click', handleDifficulty);
 
 
 function loadFunction() {
-  showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
+  // showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
+  totalClickPaymentFunction();
+  totalDividendsPaymentFunction();
 };
 
-console.log(typeof (simulationStockQuantity))
-console.log(simulationStockQuantity);;
 window.addEventListener('load', loadFunction);
