@@ -22,8 +22,6 @@ function totalClickPaymentFunction() {
     localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : "$ " + totalClickPayment;
 }
 
-// !
-
 function totalDividendsPaymentFunction() {
   totalDividendsStats = parseFloat(localStorage.getItem('totalDividendsStorage')).toFixed(2);
   totalDividends.innerHTML = totalDividendsStats;
