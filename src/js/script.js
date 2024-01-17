@@ -12,29 +12,37 @@ const totalSalary = document.getElementById('totalSalary');
 const totalDividends = document.getElementById('totalDividends');
 const showAmountInTotal = document.getElementById('amountInTotal');
 
-let totalClickPayment = localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : 0;
-let totalDividendsStats = localStorage.getItem('totalDividendsStorage') ? localStorage.getItem('totalDividendsStorage') : 0;
-let amountTotal = localStorage.getItem('totalAmountStorage') ? localStorage.getItem('totalAmountStorage') : 0;
+let totalClickPayment = parseFloat(localStorage.getItem('totalClickPayment')) || 0;
+let totalDividendsStats = parseFloat(localStorage.getItem('totalDividendsStorage')) || 0;
+let amountTotal = parseFloat(localStorage.getItem('totalAmountStorage')) || 0;
+
+function updateLocalStorage(key, value) {
+  value = parseFloat(value).toFixed(2);
+  localStorage.setItem(key, value);
+}
+
+function updateUI(element, value) {
+  element.innerHTML = `$ ${value.toFixed(2)}`;
+}
 
 function totalClickPaymentFunction() {
-  if (gameStatus == true) {
-    totalClickPayment = parseFloat(parseFloat(totalClickPayment) + parseFloat(salary)).toFixed(2);
+  if (gameStatus) {
+    totalClickPayment += parseFloat(salary);
   }
-  localStorage.setItem('totalClickPayment', totalClickPayment);
-  totalSalary.innerHTML =
-    localStorage.getItem('totalClickPayment') ? (localStorage.getItem('totalClickPayment')) : "$ " + (totalClickPayment).toFixed(2);
+
+  updateLocalStorage('totalClickPayment', totalClickPayment);
+  updateUI(totalSalary, totalClickPayment);
 }
 
 function totalDividendsPaymentFunction() {
-  totalDividendsStats = parseFloat(localStorage.getItem('totalDividendsStorage')).toFixed(2);
-  totalDividends.innerHTML = parseFloat(totalDividendsStats);
+  updateLocalStorage('totalDividendsStorage', totalDividendsStats);
+  updateUI(totalDividends, totalDividendsStats);
 }
 
 function totalAmountFunction() {
   amountTotal = totalDividendsStats + totalClickPayment;
-  localStorage.setItem('totalAmountStorage', amountTotal);
-  showAmountInTotal.innerHTML = parseFloat(amountTotal).toFixed(2);
-  console.log(totalAmount);
+  updateLocalStorage('totalAmountStorage', amountTotal);
+  updateUI(showAmountInTotal, amountTotal);
 }
 
 // Wallet control
