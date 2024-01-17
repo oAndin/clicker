@@ -25,10 +25,9 @@ function totalClickPaymentFunction() {
 // !
 
 function totalDividendsPaymentFunction() {
-  totalDividends.innerHTML = localStorage.getItem('totalDividendsStorage') ?
-    localStorage.getItem('totalDividendsStorage')
-    :
-    totalDividendsStats;
+  totalDividendsStats = parseFloat(localStorage.getItem('totalDividendsStorage')).toFixed(2);
+  totalDividends.innerHTML = totalDividendsStats;
+  console.log(typeof (totalDividendsStats));
 }
 // Wallet control
 
@@ -164,19 +163,22 @@ function buyStocks() {
 }
 
 // Dividend logic
+let dataComCheck = false;
+let dataComStockCount = 0;
 function dataComFunction() {
+  dataComCheck = true;
+  dataComStockCount = simulationStockQuantity;
   console.log("data-com:", simulationStockQuantity);
 }
 
 function dividendsPaymentFunction() {
-  let dividendsPayment = parseInt(simulationStockQuantity) * 0.01;
+  let dividendsPayment = parseInt(dataComStockCount) * 0.01;
   console.log(dividendsPayment);
   // stock count HTML value
   showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
   // totalDividendsStats it should be the sum calc of himself (value from before) with the incoming one
-  totalDividendsStats = parseFloat(totalDividendsStats + dividendsPayment);
+  totalDividendsStats = parseFloat(parseFloat(totalDividendsStats) + parseFloat(dividendsPayment));
   // write in HTML the value total dividends stats
-  totalDividends.innerHTML = parseFloat(totalDividends);
   // wallet value might be the problem here
   // ! RIGHT HERE -------------------------------------------------------------------------------------------------------
   gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
@@ -247,7 +249,7 @@ function timeFunction() {
       paymentFunction();
     }
     if (simulationDay == 15) {
-      if (simulationStockQuantity != 0) {
+      if (dataComCheck == true) {
         dividendsPaymentFunction();
         totalDividendsPaymentFunction();
       }
