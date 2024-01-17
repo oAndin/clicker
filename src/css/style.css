@@ -45,6 +45,11 @@ main.clickArea div.info div.date-money {
   top: 10%;
 }
 
+div.side-to-side {
+  display: flex;
+  gap: .3rem;
+}
+
 /* Info and investment style section  */
 
 

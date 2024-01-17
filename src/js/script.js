@@ -10,30 +10,46 @@ let salary = 0.25;
 
 const totalSalary = document.getElementById('totalSalary');
 const totalDividends = document.getElementById('totalDividends');
+const showAmountInTotal = document.getElementById('amountInTotal');
 
 let totalClickPayment = localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : 0;
 let totalDividendsStats = localStorage.getItem('totalDividendsStorage') ? localStorage.getItem('totalDividendsStorage') : 0;
+let amountTotal = localStorage.getItem('totalAmountStorage') ? localStorage.getItem('totalAmountStorage') : 0;
 
 function totalClickPaymentFunction() {
-  totalClickPayment = parseFloat(parseFloat(totalClickPayment) + parseFloat(salary)).toFixed(2);
+  if (gameStatus == true) {
+    totalClickPayment = parseFloat(parseFloat(totalClickPayment) + parseFloat(salary)).toFixed(2);
+  }
   console.log(totalClickPayment);
   localStorage.setItem('totalClickPayment', totalClickPayment);
   totalSalary.innerHTML =
-    localStorage.getItem('totalClickPayment') ? localStorage.getItem('totalClickPayment') : "$ " + totalClickPayment;
+    localStorage.getItem('totalClickPayment') ? (localStorage.getItem('totalClickPayment')) : "$ " + (totalClickPayment).toFixed(2);
 }
 
 function totalDividendsPaymentFunction() {
   totalDividendsStats = parseFloat(localStorage.getItem('totalDividendsStorage')).toFixed(2);
-  totalDividends.innerHTML = totalDividendsStats;
-  console.log(typeof (totalDividendsStats));
+  totalDividends.innerHTML = parseFloat(totalDividendsStats);
 }
+
+function totalAmountFunction() {
+  amountTotal = totalClickPayment + totalDividends;
+  console.log(amountTotal);
+  showAmountInTotal.innerHTML = parseFloat(amountTotal).toFixed(2);
+}
+
 // Wallet control
 
 const gameWallet = document.getElementById("walletInGame");
 let simulationMoney = localStorage.getItem('money') ? localStorage.getItem('money') : 0.00;
 let workedCount = localStorage.getItem('workedCount') ? localStorage.getItem('workedCount') : 0;
-gameWallet.innerHTML = simulationMoney;
+gameWallet.innerHTML = parseFloat(simulationMoney).toFixed(2);
 const workArea = document.getElementById('clickArea');
+
+const showMonthSalary = document.getElementById('showMonthSalary');
+let monthSalary = 0.00;
+showMonthSalary.innerHTML = monthSalary.toFixed(2);
+
+// work control
 
 function workFunction() {
   if (gameStatus === false) {
@@ -44,8 +60,13 @@ function workFunction() {
       ''
   } else {
     workedCount = parseFloat(workedCount + salary);
+    monthSalary = workedCount;
+    showMonthSalary.innerHTML = monthSalary;
     console.log(workedCount);
-    totalClickPaymentFunction();
+    if (gameStatus == true) {
+      totalClickPaymentFunction();
+    }
+    totalAmountFunction();
   };
 }
 
@@ -59,6 +80,7 @@ function paymentFunction() {
   simulationMoney = 0;
   workedCount = 0;
   payment = 0;
+  showMonthSalary.innerHTML = 0;
 }
 
 workArea.addEventListener('click', workFunction);
@@ -270,7 +292,7 @@ function timeFunction() {
       gameDay.innerHTML = simulationDay;
       simulationMonth = 1;
       gameMonth.innerHTML = simulationMonth;
-      simulationYear = simulationYear + 1;
+      simulationYear = parseInt(simulationYear) + 1;
       console.log(simulationMonth);
       gameYear.innerHTML = simulationYear;
       localStorage.setItem("year", simulationYear);
@@ -293,9 +315,9 @@ resetBtn.addEventListener('click', reset);
 
 function resetTimeMoney() {
   localStorage.clear();
-  simulationDay = 1;
+  simulationDay = 28;
   gameDay.innerHTML = simulationDay;
-  simulationMonth = 1;
+  simulationMonth = 12;
   gameMonth.innerHTML = simulationMonth;
   simulationYear = 2024;
   gameYear.innerHTML = simulationYear;
@@ -310,6 +332,10 @@ function resetTimeMoney() {
   totalSalary.innerHTML = "$ 0.00";
   totalDividendsStats = 0;
   totalDividends.innerHTML = "$ 0.00";
+  showMonthSalary.innerHTML = 0.00;
+  monthSalary = 0;
+  amountTotal = 0;
+  showAmountInTotal.innerHTML = "$ 0.00";
 
   stopTimeFunction();
 }
@@ -350,9 +376,13 @@ difficultyBtn.addEventListener('click', handleDifficulty);
 
 
 function loadFunction() {
-  // showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
   totalClickPaymentFunction();
   totalDividendsPaymentFunction();
+  totalAmountFunction()
 };
 
 window.addEventListener('load', loadFunction);
+
+
+// total amount bug
+// local storage year bug

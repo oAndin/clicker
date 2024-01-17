@@ -28,22 +28,34 @@
         </div>
         <p>Click here to work and get money</p>
         <p>You get pay on the fifth day</p>
+        <div class="side-to-side">
+          <p>This month: $</p>
+          <p id="showMonthSalary"> 0.00</p>
+        </div>
       </div>
     </div>
   </main>
   <section>
     <button id="showStats" class="showStats">Show stats</button>
     <div class="gameStatus" id="gameStatusDiv">
-      <div>Salary received in total: <p id="totalSalary">$ 0.00</p>
+      <div class="side-to-side">Salary received in total: <p id="totalSalary">$ 0.00</p>
       </div>
-      <div>Dividends received in total: <p id="totalDividends">$ 0.00</p>
+      <div class="side-to-side">Dividends received in total: <p id="totalDividends">$ 0.00</p>
+      </div>
+      <div class="side-to-side">
+        <p>Amount received in total:</p>
+        <p id="amountInTotal"></p>
       </div>
     </div>
     <div class="stockHandle">
-      <div class="side-to-side">
+      <div class="collum">
         <h1 id="showStockAmount">
           0
         </h1>
+        <div class="side-to-side">
+          <h3>Patrimony: $</h3>
+          <h3 id="netWorth">0.00</h3>
+        </div>
       </div>
       <button class="quantityBtn" id="quantityBtn">
       </button>
