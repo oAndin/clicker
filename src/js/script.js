@@ -20,7 +20,6 @@ function totalClickPaymentFunction() {
   if (gameStatus == true) {
     totalClickPayment = parseFloat(parseFloat(totalClickPayment) + parseFloat(salary)).toFixed(2);
   }
-  console.log(totalClickPayment);
   localStorage.setItem('totalClickPayment', totalClickPayment);
   totalSalary.innerHTML =
     localStorage.getItem('totalClickPayment') ? (localStorage.getItem('totalClickPayment')) : "$ " + (totalClickPayment).toFixed(2);
@@ -32,9 +31,10 @@ function totalDividendsPaymentFunction() {
 }
 
 function totalAmountFunction() {
-  amountTotal = totalClickPayment + totalDividends;
-  console.log(amountTotal);
+  amountTotal = totalDividendsStats + totalClickPayment;
+  localStorage.setItem('totalAmountStorage', amountTotal);
   showAmountInTotal.innerHTML = parseFloat(amountTotal).toFixed(2);
+  console.log(totalAmount);
 }
 
 // Wallet control
@@ -62,11 +62,11 @@ function workFunction() {
     workedCount = parseFloat(workedCount + salary);
     monthSalary = workedCount;
     showMonthSalary.innerHTML = monthSalary;
-    console.log(workedCount);
+    amountTotal = parseFloat(parseFloat(totalClickPayment) + parseFloat(totalDividendsStats));
     if (gameStatus == true) {
       totalClickPaymentFunction();
+      totalAmountFunction();
     }
-    totalAmountFunction();
   };
 }
 
@@ -315,9 +315,9 @@ resetBtn.addEventListener('click', reset);
 
 function resetTimeMoney() {
   localStorage.clear();
-  simulationDay = 28;
+  simulationDay = 1;
   gameDay.innerHTML = simulationDay;
-  simulationMonth = 12;
+  simulationMonth = 1;
   gameMonth.innerHTML = simulationMonth;
   simulationYear = 2024;
   gameYear.innerHTML = simulationYear;
