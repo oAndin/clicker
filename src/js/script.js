@@ -173,12 +173,14 @@ function dividendsPaymentFunction() {
   console.log(dividendsPayment);
   // stock count HTML value
   showStockQuantity.innerHTML = "Stocks:" + parseInt(simulationStockQuantity);
-  // wallet value might be the problem here
-  gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
   // totalDividendsStats it should be the sum calc of himself (value from before) with the incoming one
   totalDividendsStats = parseFloat(totalDividendsStats + dividendsPayment);
   // write in HTML the value total dividends stats
   totalDividends.innerHTML = parseFloat(totalDividends);
+  // wallet value might be the problem here
+  // ! RIGHT HERE -------------------------------------------------------------------------------------------------------
+  gameWallet.innerHTML = parseFloat(parseFloat(gameWallet.innerHTML) + parseFloat(dividendsPayment)).toFixed(2);
+  // ! ABOVE
   localStorage.setItem('totalDividendsStorage', totalDividendsStats)
   totalDividendsPaymentFunction();
 }
