@@ -140,7 +140,7 @@ div.walletDiv {
 
 button.showStats {
   position: absolute;
-  top: 1%;
+  top: 20%;
   right: 1%;
 }
 
@@ -152,4 +152,64 @@ div.gameStatus {
   border-radius: 8px;
   visibility: hidden;
   background-color: #fff;
+}
+
+@media only screen and (max-width: 431px) {
+  body {
+    flex-direction: column;
+  }
+
+  main.clickArea {
+    height: 50%;
+    width: 100%;
+  }
+
+  div.gameMenu {
+    position: static;
+    width: 100%;
+  }
+
+  div.stockHandle {
+    width: 90%;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  button.showStats {
+    position: absolute;
+    top: 25%;
+    right: 1%;
+  }
+
+}
+
+@media only screen and (max-width: 769px) {
+  body {
+    flex-direction: column;
+  }
+
+  main.clickArea {
+    height: 50%;
+    width: 100%;
+  }
+
+  div.gameMenu {
+    position: static;
+    width: 100%;
+  }
+
+  div.stockHandle {
+    width: 90%;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  button.showStats {
+    position: absolute;
+    top: 25%;
+  }
 }

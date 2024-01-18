@@ -4,7 +4,7 @@
 
 // salary variable to change game mode
 
-let salary = 0.25;
+let salary = 1;
 
 // total stats 
 
@@ -29,7 +29,6 @@ function totalClickPaymentFunction() {
   if (gameStatus) {
     totalClickPayment += parseFloat(salary);
   }
-
   updateLocalStorage('totalClickPayment', totalClickPayment);
   updateUI(totalSalary, totalClickPayment);
 }
