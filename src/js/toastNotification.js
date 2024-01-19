@@ -1,28 +1,29 @@
-// const toastNotification = document.getElementById('toastNotification');
-
-// export default function toastNotification(text, type, time) {
-//   console.log("Apertei o botão");
-//   switch (type) {
-//     case 'sucess':
-//       toastNotification.innerHTML = `${text}`;
-//       toastNotification.style.backgroundcolor = 'green';
-//       setTimeout(() => {
-//         toastNotification.style.visibility = 0;
-//       }, time)
-//       break;
-//     case 'alert':
-//       toastNotification.innerHTML = `${text}`;
-//       toastNotification.style.backgroundcolor = 'yellow';
-//       break;
-//     case 'error':
-//       toastNotification.innerHTML = `${text}`;
-//       toastNotification.style.backgroundcolor = 'red';
-//       break;
-//     default:
-//       break
-//   }
-// }
-
-export function toastNotification() {
-  console.log('Toast!');
+export function toastNotification(element, text, type, time) {
+  console.log("Apertei o botão");
+  switch (type) {
+    case 'sucess':
+      element.innerHTML = `${text}`;
+      element.style.backgroundColor = 'green';
+      element.style.color = '#fff';
+      element.style.animation = `popUp ${time}s ease-in-out`;
+      break;
+    case 'alert':
+      element.innerHTML = `${text}`;
+      element.style.color = '#000';
+      element.style.animation = `popUp ${time} ease-in-out`;
+      element.style.backgroundColor = 'yellow';
+      setTimeout(() => {
+        element.style.opacity = 0;
+      }, time)
+      break;
+    case 'error':
+      element.innerHTML = `${text}`;
+      element.style.backgroundColor = 'red';
+      setTimeout(() => {
+        element.style.opacity = 0;
+      }, time)
+      break;
+    default:
+      break
+  }
 }
