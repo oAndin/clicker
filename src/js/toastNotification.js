@@ -5,7 +5,7 @@ export function toastNotification(element, text, type, time) {
       element.innerHTML = `${text}`;
       element.style.backgroundColor = 'green';
       element.style.color = '#fff';
-      element.style.animation = `popUp ${time}s ease-in-out`;
+      element.style.animation = `popUp ${time}s ease-in-out normal`;
       break;
     case 'alert':
       element.innerHTML = `${text}`;

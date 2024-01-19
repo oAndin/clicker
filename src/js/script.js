@@ -1,7 +1,7 @@
 // salary variable to change game mode
 
 import { toastNotification } from '../js/toastNotification.js';
-
+import { menuController } from '../js/menuController.js';
 let salary = 1;
 
 // total stats 
@@ -402,3 +402,5 @@ function handleToastNotification() {
 }
 
 toastNotificationBtn.addEventListener('click', handleToastNotification);
+
+menuController();

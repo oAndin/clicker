@@ -37,47 +37,50 @@
     </div>
   </main>
   <section>
+    <div class="patrimony side-to-side">
+      <h3>Patrimony: $</h3>
+      <h3 id="netWorth">0.00</h3>
+    </div>
     <nav>
       <ul>
-        <button id="testButton">Test sucess</button>
-        <li>"Ações"</li>
-        <li>"Funcionarios"</li>
-        <li>"Empresas"</li>
-        <li>"informações"</li>
+        <li class="" id="stockHandle">
+          <p class="liTitle">Stocks</p>
+          <div class="stockHandle " id="stockHandle">
+            <div class="collum">
+              <h1 id="showStockAmount">
+                0
+              </h1>
+            </div>
+            <button class="quantityBtn" id="quantityBtn">
+            </button>
+            <button class="buyStockBtn" id="buyStockBtn">
+            </button>
+          </div>
+        </li>
+        <li class="" id="employeesHandle">"Funcionarios"</li>
+        <li class="" id="companyHandle">"Empresas"</li>
+        <li class="" id="infoHandle">
+          "Informações"
+          <div class="gameStatus" id="gameStatusDiv">
+            <div class="side-to-side">Salary received in total: <p id="totalSalary">$ ---</p>
+            </div>
+            <div class="side-to-side">Dividends received in total: <p id="totalDividends">$ ---</p>
+            </div>
+            <div class="side-to-side">
+              <p>Amount received in total:</p>
+              <p id="amountInTotal">$ ---</p>
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
+    <button id="testButton">Test sucess</button>
     <button id="showStats" class="showStats">Show stats</button>
-    <div class="gameStatus" id="gameStatusDiv">
-      <div class="side-to-side">Salary received in total: <p id="totalSalary">$ ---</p>
-      </div>
-      <div class="side-to-side">Dividends received in total: <p id="totalDividends">$ ---</p>
-      </div>
-      <div class="side-to-side">
-        <p>Amount received in total:</p>
-        <p id="amountInTotal">$ ---</p>
-      </div>
+    <div class="gameMenu" id="GameMenu">
+      <button class="statusBtn" id="statusBtn"></button>
+      <button class="difficulty" id="difficulty">Game Mode: Normal (CLT)</button>
+      <button class="resetBtn" id="resetBtn">Reset Game</button>
     </div>
-    <div class="stockHandle">
-      <div class="collum">
-        <h1 id="showStockAmount">
-          0
-        </h1>
-        <div class="side-to-side">
-          <h3>Patrimony: $</h3>
-          <h3 id="netWorth">0.00</h3>
-        </div>
-      </div>
-      <button class="quantityBtn" id="quantityBtn">
-      </button>
-      <button class="buyStockBtn" id="buyStockBtn">
-      </button>
-      <div class="gameMenu" id="GameMenu">
-        <button class="statusBtn" id="statusBtn"></button>
-        <button class="difficulty" id="difficulty">Game Mode: Normal (CLT)</button>
-        <button class="resetBtn" id="resetBtn">Reset Game</button>
-      </div>
-    </div>
-
   </section>
   <script src="./src/js/script.js" type="module"></script>
 </body>

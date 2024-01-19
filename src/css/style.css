@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  list-style: none;
 }
 
 body {
@@ -18,7 +19,7 @@ body {
 main.clickArea {
   background-color: #fff;
   color: #000;
-  width: 66%;
+  width: 67%;
   height: 100vh;
   cursor: pointer;
   position: relative;
@@ -100,42 +101,126 @@ section {
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid #000;
 }
 
 section div.stockHandle div.side-to-side h1 {
   display: flex;
 }
 
-div.stockHandle {
+section div.patrimony {
+  background-color: green;
+  color: #fff;
+  position: absolute;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  width: 50%;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  background-color: #fff;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 4rem;
 }
 
-button.buyStockBtn,
-button.quantityBtn {
+section nav {
+  display: flex;
+  width: 100%;
   background-color: #000;
   color: #fff;
-  border: 1px solid #000;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 0.3rem;
+  position: absolute;
+  top: 5rem;
+  height: 4rem;
 }
+
+section nav ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+section nav ul li {
+  display: flex;
+  cursor: pointer;
+  width: 25%;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #fff;
+  transition: .5s ease-in-out;
+}
+
+div.stockHandle {
+  opacity: 0;
+  visibility: hidden;
+}
+
+section nav ul li.active {
+  background-color: #109251;
+
+  & div.stockHandle {
+    display: flex;
+    opacity: 1;
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    color: #000;
+    background-color: #fff;
+    visibility: visible;
+
+    & h1 {
+      text-align: center;
+      font-size: xx-large;
+    }
+
+    & button.buyStockBtn,
+    button.quantityBtn {
+      width: 33%;
+      margin: 1rem auto;
+      background-color: #000;
+      color: #fff;
+      border: 1px solid #000;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 0.3rem;
+    }
+  }
+
+  & div.gameStatus {
+    position: absolute;
+    top: 5rem;
+    right: 0%;
+    width: 100%;
+    padding: 1rem;
+    color: #000;
+    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+div.gameStatus {
+  opacity: 0;
+  visibility: hidden;
+}
+
+section nav ul li:hover {
+  background-color: #085d32;
+}
+
+
 
 section div.gameMenu {
   position: absolute;
-  left: 50%;
   bottom: 10%;
+  left: 50%;
   transform: translateX(-50%);
   width: 33%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
 }
 
 button.resetBtn,
@@ -179,8 +264,8 @@ div.walletDiv {
 
 button.showStats {
   position: absolute;
-  top: 20%;
-  right: 1%;
+  bottom: 30%;
+  left: 50%;
 }
 
 div.gameStatus {
