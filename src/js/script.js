@@ -1,8 +1,6 @@
-// import swal from 'sweetalert';
-
-// swal('Hello!');
-
 // salary variable to change game mode
+
+import { toastNotification } from "./toastNotification";
 
 let salary = 1;
 
@@ -390,6 +388,14 @@ function loadFunction() {
 
 window.addEventListener('load', loadFunction);
 
-
+// ---------------
+toastNotification();
+// const testButton = document.getElementById('testButton');
+// testButton.addEventListener('click', toastNotification)
+// // text, type, time
+// toastNotification(teste, sucess, 2000);
+// text = testButton.innerHTML;
+// type = 'sucess';
+// time = 2000;
 // total amount bug
 // local storage year bug
